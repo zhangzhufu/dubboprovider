@@ -1,4 +1,5 @@
 package com.unj.dubbotest.filter;
+
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
@@ -13,19 +14,19 @@ import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcResult;
 
 public class RestValidateFilter implements Filter {
-    Logger logger= LoggerFactory.getLogger(RestValidateFilter.class);
+	Logger logger = LoggerFactory.getLogger(RestValidateFilter.class);
 
-    @Override
-    public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-   
-        return getRpcResult(invoker,invocation,null);
-    }
+	@Override
+	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
-    public Result getRpcResult(Invoker<?> invoker,Invocation invocation,JSONObject result){
-        if(invoker==null){
-            return  new RpcResult(Response.status(401).build());
-        }else{
-            return invoker.invoke(invocation);
-        }
-    }
+		return getRpcResult(invoker, invocation, null);
+	}
+
+	public Result getRpcResult(Invoker<?> invoker, Invocation invocation, JSONObject result) {
+		if (invoker == null) {
+			return new RpcResult(Response.status(401).build());
+		} else {
+			return invoker.invoke(invocation);
+		}
+	}
 }
